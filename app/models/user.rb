@@ -31,6 +31,20 @@ class User < ActiveRecord::Base
     return nil  if user.nil?
     return user if user.authenticate(submitted_password)
   end
-                 
+        
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && user.make_salt == cookie_salt) ? user : nil
+  end    
+  
+  def make_salt
+    #secure_hash("#{Time.now.utc}--#{password}")
+    # TODO: fix security loophole!
+    secure_hash("#{password}")
+  end 
+  
+  def secure_hash(string)
+    Digest::SHA2.hexdigest(string)
+  end    
 end
 
