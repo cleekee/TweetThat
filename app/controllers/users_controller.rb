@@ -47,7 +47,11 @@ class UsersController < ApplicationController
   
   def index
     @title = "All users"
-    @users = User.paginate(:page => params[:page], :per_page => 10).order('name ASC')
+    @users = User.paginate(:per_page => 10, :page => params[:page],
+             :conditions => ['name like ?', "%#{params[:search]}%"],
+             :order => 'name')
+    #@users = User.paginate(:page => params[:page], :per_page => 10).order('name ASC')
+    
   end
 
   def show
@@ -75,6 +79,8 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(:page => params[:page])
     render 'show_follow'
   end
+  
+
 
   private
 

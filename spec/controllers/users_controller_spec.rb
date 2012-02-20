@@ -42,7 +42,7 @@ describe UsersController do
 
     it "should have a profile image" do
       get :show, :id => @user
-      response.should have_selector("h1>img", :class => "gravatar")
+      response.should have_selector("h1>img", :class => "gravatar round")
     end
     
     it "should show the user's microposts" do
@@ -70,10 +70,6 @@ describe UsersController do
         third  = Factory(:user, :name => "Ben", :email => "another@example.net")
 
         @users = [@user, second, third]
-        30.times do
-          @users << Factory(:user, :name => Factory.next(:name),
-                                   :email => Factory.next(:email))
-        end
       end
 
       it "should be successful" do
@@ -94,6 +90,11 @@ describe UsersController do
       end
 
       it "should paginate users" do
+        8.times do
+          @users << Factory(:user, :name => Factory.next(:name),
+                                   :email => Factory.next(:email))
+        end
+        
         get :index
         response.should have_selector("div.pagination")
         response.should have_selector("span.disabled", :content => "Previous")
@@ -149,7 +150,7 @@ describe UsersController do
       
       it "should have a welcome message" do
         post :create, :user => @attr
-        flash[:success].should =~ /welcome to the sample app/i
+        flash[:success].should =~ /joined/i
       end
       
       it "should sign the user in" do
@@ -173,13 +174,6 @@ describe UsersController do
     it "should have the right title" do
       get :edit, :id => @user
       response.should have_selector("title", :content => "Edit user")
-    end
-
-    it "should have a link to change the Gravatar" do
-      get :edit, :id => @user
-      gravatar_url = "http://gravatar.com/emails"
-      response.should have_selector("a", :href => gravatar_url,
-                                         :content => "change")
     end
   end
 
