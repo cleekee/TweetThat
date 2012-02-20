@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def network
     @user = User.find(params[:id])
-    @title = "Tweet network"
+    @title = "Network"
   end
   
   def show
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "You have joined TweetThat. Start tweeting!"
       redirect_to @user
     else
       @title = "Sign up"
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   
   def index
     @title = "All users"
-    @users = User.paginate(:page => params[:page], :per_page => 10)
+    @users = User.paginate(:page => params[:page], :per_page => 10).order('name ASC')
   end
 
   def show

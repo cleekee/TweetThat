@@ -18,15 +18,10 @@
     <td class="sidebar round">
       <strong>Name</strong><br> <%= @user.name %><br><br>
       <!--<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />-->
-	    <strong>Total tweets</strong><br> <%= @user.microposts.count %>
+	    <strong>Total tweets</strong><br> <%= @user.microposts.count %> <br><br>
 			<% if signed_in? %>
-			  <table>
-			    <tr>
-			      <td> 
-	            <br> <%= render 'shared/stats' %>
-			      </td>
-			    </tr>
-			  </table>
+        <%= render 'shared/stats' %> <hr>
+			  <%= link_to "User's network", '/network/'+@user.id.to_s %>
 			<% end %>
     </td>
   </tr>

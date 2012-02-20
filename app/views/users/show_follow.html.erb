@@ -11,10 +11,11 @@
       <% end %>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
-      <strong>Microposts</strong> <%= @user.microposts.count %>
+      <strong>Name</strong><br> <%= @user.name %><br><br>
+      <!--<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />-->
+	    <strong>Total tweets</strong><br> <%= @user.microposts.count %> <br><br>
       <%= render 'shared/stats' %>
+      <hr>
       <% unless @users.empty? %>
         <% @users.each do |user| %>
           <%= link_to gravatar_for(user, :size => 30), user %>
