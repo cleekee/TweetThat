@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
   
+  def network
+    @user = User.find(params[:id])
+    @title = "Tweet network"
+  end
+  
   def show
     @user = User.find(params[:id])
     @title = @user.name

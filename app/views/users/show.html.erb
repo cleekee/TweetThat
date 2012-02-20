@@ -6,17 +6,28 @@
         <%= @user.name %>
       </h1>
 	  <%= render 'follow_form' if signed_in? %>
+	  <h3><br><br>Tweets by this user</h3>
 	  <% unless @user.microposts.empty? %>
+	    <center><%= will_paginate @microposts %></center>
 	    <table class="microposts" summary="User microposts">
 	      <%= render @microposts %>
 	    </table>
-	    <%= will_paginate @microposts %>
+	    <center><%= will_paginate @microposts %></center>
   	  <% end %>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
-	  <strong>Microposts</strong> <%= @user.microposts.count %>
+      <strong>Name</strong><br> <%= @user.name %><br><br>
+      <!--<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />-->
+	    <strong>Total tweets</strong><br> <%= @user.microposts.count %>
+			<% if signed_in? %>
+			  <table>
+			    <tr>
+			      <td> 
+	            <br> <%= render 'shared/stats' %>
+			      </td>
+			    </tr>
+			  </table>
+			<% end %>
     </td>
   </tr>
 </table>

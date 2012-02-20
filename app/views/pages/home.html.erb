@@ -2,24 +2,24 @@
   <table class="front" summary="For signed-in users">
     <tr>
       <td class="main">
-        <h1 class="micropost">What's up?</h1>
+        <h4 class="micropost">Say anything:</h4>
         <%= render 'shared/micropost_form' %>
+    <h3>Recent tweets</h3>
 		<%= render 'shared/feed' %>
       </td>
       <td class="sidebar round">
         <%= render 'shared/user_info' %>
-		<%= render 'shared/stats' %>
+				<%= render 'shared/stats' %>
       </td>
     </tr>
   </table>
 <% else %>
-  <h1>Sample App</h1>
-
   <p>
-    This is the home page for the
+    This is a demo app based on 
     <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
+    sample application. It is slightly modified with some new features added.
   </p>
 
-  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+  <%= link_to "Create new user", signup_path, :class => "signup_button round" %>
+  <h4><center><br>Already a user? <%= link_to "Sign in", signin_path %> immediately!</center><h4>
 <% end %>

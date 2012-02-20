@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "LayoutLinks" do
   
   before(:each) do
-    @base_title = "Ruby on Rails Tutorial Sample App | "
+    @base_title = "TweetThat / "
   end
   
   it "should have a Home page at '/'" do
@@ -31,25 +31,15 @@ describe "LayoutLinks" do
     response.should have_selector('title', :content => "Sign up")
   end
   
-  it "should have the right links on the layout" do
-    visit root_path
-    click_link "About"
-    response.should have_selector('title', :content => "About")
-    #click_link "Help"
-    #response.should have_selector('title', :content => "Help")
-    click_link "Contact"
-    response.should have_selector('title', :content => "Contact")
-    click_link "Home"
-    response.should have_selector('title', :content => "Home")
-    click_link "Sign up now!"
-    response.should have_selector('title', :content => "Sign up")
-  end
-  
   describe "when not signed in" do
     it "should have a signin link" do
       visit root_path
-      response.should have_selector("a", :href => signin_path,
-                                         :content => "Sign in")
+      response.should have_selector("a", :href => signin_path)
+    end
+    
+    it "should have a signup link" do
+      visit root_path
+      response.should have_selector("a", :href => signup_path)
     end
   end
 

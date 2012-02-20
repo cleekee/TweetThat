@@ -1,6 +1,6 @@
 <header>
   <%= link_to logo, root_path %>
-  <nav class="round">
+  <nav class="topbar round">
     <ul>
       <li><%= link_to "Home", root_path %></li>
       <% if signed_in? %>
@@ -16,4 +16,9 @@
       <% end %>
     </ul>
   </nav>
+  <% if signed_in? %>
+  <div class="login_msg">
+  <h4>Start tweeting, <%= current_user.name %>!</h4>
+  </div>
+  <% end %>
 </header>
