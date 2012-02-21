@@ -5,14 +5,14 @@ Arrow in <font color="#B0A000">yellow</font> indicates a person who follows <%= 
 var graph = new Graph();
 
 var node<%= @user.id %> = graph.newNode({label: '<%= @user.name.split(' ')[0]  %>'});
-<% (@user.following.take(5) | @user.followers.take(5)).each do |person| %>
+<% (@user.following.take(6) | @user.followers.take(6)).each do |person| %>
 var node<%= person.id %> = graph.newNode({label: '<%= person.name.split(' ')[0] %>'});
 <% end %>
 
-<% @user.following.take(5).each do |following| %>
+<% @user.following.take(6).each do |following| %>
 graph.newEdge(node<%= @user.id %>, node<%= following.id %>, {color: '#00A0B0'});
 <% end %>
-<% @user.followers.take(5).each_with_index do |follower, index| %>
+<% @user.followers.take(6).each_with_index do |follower, index| %>
 graph.newEdge(node<%= follower.id %>, node<%= @user.id %>, {color: '#B0A000'});
 <% end %>
 
