@@ -53,11 +53,6 @@ describe MicropostsController do
         post :create, :micropost => @attr
         response.should redirect_to(root_path)
       end
-
-      it "should have a flash message" do
-        post :create, :micropost => @attr
-        flash[:success].should =~ /micropost created/i
-      end
     end
   end
 
